@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     
     path('movies/', views.movies),
-    path('movieget/', views.movieget),
+    path('dataget/', views.dumpMovieDataGet),
     # # path('movies/<int:community_pk>/', views.community_detail),
     # path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # # optional UI
