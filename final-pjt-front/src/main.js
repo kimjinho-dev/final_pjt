@@ -3,7 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import axios from 'axios'
+// import axios from 'axios'
 import './assets/common.css'
 
 // Make BootstrapVue available throughout your project

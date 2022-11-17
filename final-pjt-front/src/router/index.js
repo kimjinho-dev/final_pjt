@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MoviesView from '../views/MoviesView.vue'
-import FoodsView from '../views/FoodsView.vue'
-import CommunityView from '../views/CommunityView.vue'
+import MoviesView from '../views/Movies/MoviesView.vue'
+import FoodsView from '../views/Foods/FoodsView.vue'
+import CommunityView from '../views/Community/CommunityView.vue'
 
 Vue.use(VueRouter)
 
