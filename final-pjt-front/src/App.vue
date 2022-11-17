@@ -6,7 +6,6 @@
       <router-link :to="{ name: 'foods' }">Foods</router-link>
     </nav>
     <router-view/>
-    <hr>
   </div>
 </template>
 

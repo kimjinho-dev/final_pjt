@@ -1,11 +1,11 @@
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.urls import path
-from . import views
+from . import views, tests
 
 urlpatterns = [
-    
     path('movies/', views.movies),
     path('dataget/', views.dumpMovieDataGet),
+    path('datatest/', tests.datatest),
     # # path('movies/<int:community_pk>/', views.community_detail),
     # path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # # optional UI

@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import CommunityListSerializer, CommunitySerializer
 from .serializers import FoodsListSerializer, FoodsSerializer
 # from .serializers import CommentSerializer
-from .models import Community, Foods
+from .models import Community, CommunityTag, Foods
 # from .models import Article
 # from .models import Comment
 
@@ -66,7 +66,21 @@ def community_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        tags_list = request.data['tags'].split('#')
+        tags_pk_list = []
+        for tag in tags_list:
+            t, _ = CommunityTag.objects.get_or_create(name=tag)
+            community = Community.objects.create()
+            tags_pk_list.append(str(t.pk))
+        print(tags_pk_list)
+        print(request.data['tags'])
+        request.data['tags'] = tags_pk_list
+        # tags내용이 없으면 넣는다, 아니면 2번째값으로 false반환하지만 현재에는 의미가 없으므로 둘다 빈값
         serializer = CommunitySerializer(data=request.data)
+        # print(serializer)
+        # print(request.data)
+        # print(request.data['tags'])          
+        
         if serializer.is_valid(raise_exception=True):
             # serializer.save()
             serializer.save(user=request.user)
