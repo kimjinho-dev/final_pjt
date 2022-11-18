@@ -4,7 +4,7 @@
       <label for="communityarticletitle">Title: </label>
       <input id="communityarticletitle" type="text" v-model="communityarticletitle">
       <br>
-      <textarea v-model="communityarticlecontent"></textarea>
+      <textarea cols="30" rows="10" v-model="communityarticlecontent"></textarea>
     </div>
     <button type="submit">submit</button>
   </form>
