@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MoviesView from '../views/Movies/MoviesView.vue'
+import MoviesView from '@/views/Movies/MoviesView'
+import MovieDetail from '@/views/Movies/MovieDetail'
+import MoviesSearchResult from '@/views/Movies/MoviesSearchResult'
 import CommunityView from '../views/Community/CommunityView.vue'
 import Create_C_Article from '../views/Community/Create_C_Article.vue'
 import Detail_C_Article from '../views/Community/Detail_C_Article.vue'
@@ -12,6 +14,16 @@ const routes = [
     path: '/movies',
     name: 'Movies',
     component: MoviesView
+  },
+  {
+    path: '/movies/:movie_id',
+    name: 'movieDetail',
+    component: MovieDetail,
+  },
+  {
+    path: '/movies/searchresult',
+    name: 'searchresult',
+    component: MoviesSearchResult,
   },
   {
     path: '/community',

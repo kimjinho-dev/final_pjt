@@ -22,12 +22,12 @@ def community_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        tags_list = request.POST.get('tags').split('#')
+        tags_list = request.data.get('tags').split('#')
         # #으로 내용 구분. 추후에 공백제거처리
         community = Community.objects.create(
             user=request.user,
-            title=request.POST.get('title',''),
-            content=request.POST.get('content',''),
+            title=request.data.get('title',''),
+            content=request.data.get('content',''),
         )
         for tag in tags_list: 
             if tag:

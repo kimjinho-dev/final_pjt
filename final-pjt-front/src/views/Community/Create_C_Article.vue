@@ -7,7 +7,7 @@
         type="text"
         v-model.trim="communityarticletitle"
       />
-      <br />
+      <br/>
       <textarea
         cols="30"
         rows="10"
@@ -32,29 +32,25 @@ export default {
   },
   methods: {
     createArticle() {
-      const data = {
-        title: this.communityarticletitle,
-        content: this.communityarticlecontent,
-      };
-      if (!data.title) {
+      if (!this.communityarticletitle) {
         alert("제목을 입력해주세요");
         return;
       }
       axios({
-        method: "post",
+        method: "POST",
         url: `${API_URL}/api/v1/community/`,
         data: {
-          title: data.title,
-          content: data.content,
+          title: this.communityarticletitle,
+          content: this.communityarticlecontent,
           tags: "#1",
         },
         headers: {
-          Authorization: `Token df16842a90f1d9aea223e8b9cb93156ab06cc528`,
+          Authorization: "Token c457306e3e505a00a28dec8bc9e3a42b736368f3",
         },
       })
         .then((res) => {
           console.log(res);
-          this.$router.push({ name: "ArticleView" });
+          this.$router.push({ name: "Community" });
         })
         .catch((err) => {
           console.log(err);

@@ -42,3 +42,18 @@ overview = 줄거리(빈값일수도있음)
 poster_path = 포스터 url. `https://image.tmdb.org/t/p/{w500 or original}/{poster_path}` 형태로 사용  
 vote_average = 평점(소수점)  
 release_data = 개봉일자  
+
+
+<hr>
+
+1118-1820: Back update & Front(movie) update
+
+<back>
+- SNS POST data 수신 오류 해결
+
+<front>
+- movie 추천목록 axios get & 출력
+- movie 추천목록 슬라이드 템플릿 구성
+- 추천영화 클릭시 detail 페이지 이동
+- movie detail axios get & 출력
+- sns POST 메서드 수정
