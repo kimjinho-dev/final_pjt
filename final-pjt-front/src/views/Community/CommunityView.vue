@@ -1,22 +1,19 @@
 <template>
   <div>
     <h1>Community</h1>
-    <router-link :to="{ name: 'createcommunityarticle' }">[create]</router-link>
-    <hr/>
-    <DummyList/>
+    <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
+    <hr />
+    <CommunityList />
   </div>
 </template>
 
 <script>
-// import PageHeader from '@/components/community/PageHeader'
-import DummyList from '@/components/community/DummyList'
-// import DummyForm from '@/components/community/DummyForm'
+import CommunityList from "@/components/community/CommunityList";
 
 export default {
-  name: 'CommunityView',
+  name: "CommunityView",
   components: {
-    DummyList,
-    // DummyForm,
-  }
-}
+    CommunityList,
+  },
+};
 </script>

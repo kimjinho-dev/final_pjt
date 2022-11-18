@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <nav>
-      <router-link :to="{ name: 'movies' }">Movies</router-link> |
-      <router-link :to="{ name: 'community' }">Community</router-link>
+      <router-link :to="{ name: 'Movies' }">Movies</router-link> |
+      <router-link :to="{ name: 'Community' }">Community</router-link> |
+      <router-link :to="{ name: 'Signup' }">Signup</router-link> |
+      <router-link :to="{ name: 'Login' }">Login</router-link>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-export default{
-  
-}
+export default {};
 </script>
 
 

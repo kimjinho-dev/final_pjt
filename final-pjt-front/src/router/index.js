@@ -3,25 +3,31 @@ import VueRouter from 'vue-router'
 import MoviesView from '../views/Movies/MoviesView.vue'
 import CommunityView from '../views/Community/CommunityView.vue'
 import Create_C_Article from '../views/Community/Create_C_Article.vue'
+import Detail_C_Article from '../views/Community/Detail_C_Article.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/movies',
-    name: 'movies',
+    name: 'Movies',
     component: MoviesView
   },
   {
     path: '/community',
-    name: 'community',
+    name: 'Community',
     component: CommunityView
   },
   {
     path: '/community/createarticle',
-    name: 'createcommunityarticle',
+    name: 'CreateCommunityArticle',
     component: Create_C_Article
   },
+  {
+    path: '/community/:id',
+    name: 'DetailCommunityArticle',
+    component: Detail_C_Article
+  }
 ]
 
 const router = new VueRouter({
