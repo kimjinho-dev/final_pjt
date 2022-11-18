@@ -6,7 +6,6 @@ from .serializers import (
     MovieSerializer,
     MovieListSerializer,
     GenreSerializer,
-    MovieMatchingGenreSerializer,
 )
 from rest_framework.decorators import api_view
 

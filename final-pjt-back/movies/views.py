@@ -1,23 +1,12 @@
-
 from rest_framework.response import Response
-# from rest_framework.decorators import api_view
-
-# permission Decorators
-# from rest_framework.decorators import permission_classes
-# from rest_framework.permissions import IsAuthenticated
-
 # from rest_framework import status
+from rest_framework.decorators import api_view
 from .serializers import MovieListSerializer, MovieSerializer
-from .models import Movie
-
+from .models import Movie, Genre
 
 from django.shortcuts import render,redirect, get_object_or_404, get_list_or_404
 import requests
-import os
 import json
-from django.http import HttpResponseForbidden 
-# from .models import Article
-# from .models import Comment
 
 class URLMaker:
     url = 'https://api.themoviedb.org/3'
@@ -40,6 +29,9 @@ class URLMaker:
         url += f'?api_key={self.key}&language=ko-KR&page={str(page)}'
         return url    
 
+    def get_movie_detail(self,movieId): # 영화 디테일
+        url = f'{self.url}/movie/{movieId}/?api_key={self.key}&language=ko-KR'
+
     def get_genre_url(self):
         url = f'{self.url}/genre/movie/list?api_key={self.key}'
         return url
@@ -48,59 +40,39 @@ class URLMaker:
     #     url = f'{self.url}/movie/popular?api_key={self.key}&language=ko-KR&page=1'
     #     return url
 
-    def get_smilarMovie_url(self,movieId):
+    def get_smilarMovie_url(self,movieId):  # 유사영화(id필요)
         url = f'{self.url}/movie/{movieId}/similar?api_key={self.key}&language=ko-KR&page=1'
         return url
 
 TMDB_KEY = '0bdf8c1af69dea38be1f8564ad3e8265'
 url = URLMaker(TMDB_KEY)
 
+@api_view(['GET'])
 def movies(request):
-    if request.method == 'GET':
-        # articles = Article.objects.all()
-        movies = get_list_or_404(Movie)
-        serializer = MovieListSerializer(movies, many=True)
-        return Response(serializer.data)
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies, many=True)
+    return Response(serializer.data)
 
-    # elif request.method == 'POST':
-    #     serializer = MovieSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         # serializer.save()
-    #         serializer.save(user=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+@api_view(['GET'])
+def movie_detail(request,movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def genre(request,genre_id): # 해당 장르에 맞는 영화 출력
+    genre = get_object_or_404(Genre, pk=genre_id)
+    serializer = MovieSerializer(genre.movies.all(), many=True)  
+    return Response(serializer.data)
+
+# @api_view(['GET'])
+# def smilar(request,movie_id): # 해당 영화와 비슷한 영화 출력(이건 뷰에서하는게 좋을거같은데?)
+#     raw_data = requests.get(url.get_smilarMovie_url(movieId=movie_id))
+#     json_data = raw_data.json()
+#     serializer = MovieSerializer(json_data)
+#     return Response(raw_data.data)
 
 def dumpMovieDataGet(request):
-#     TMD_KEY = '0bdf8c1af69dea38be1f8564ad3e8265'
-#     LIST_URL = f"https://api.themoviedb.org/3/movie/popular?api_key={TMD_KEY}&language=ko-KR"
-#     listData = requests.get(LIST_URL)
-#     resDatas = listData.json().get('results')
-#     # serializer = MovieSerializer(resDatas, many=True)
-#     with open('./movies/fixtures/movies_data.json', 'w', encoding='utf-8') as file:
-#         json.dump(resDatas, file, indent="\t", ensure_ascii=False)                      # 인기영화 100개 fixtures
-#     # serializer = MovieListSerializer(movies, many=True)
-#     # print(resDatas)
-#     # print(serializer)
-#     # return Response(serializer)
-#     # print(resDatas)
-#     # print('뭐야')
-#     # while(resDatas):
-#     #     movie = Movie()
-#     #     resData = resDatas.pop()
-#     #     # movie = MovieSerializer(resData)
-#     #     # print(",".join(map(str, resData['genre_ids']))
-#     #     movie.title = resData['title']
-#     #     movie.overview = resData['overview']        
-#     #     movie.genres = ",".join(map(str, resData['genre_ids']))
-#     #     movie.movieId = resData['id']
-#     #     movie.poster_url = resData['poster_path']
-#     #     movie.vote_average = resData['vote_average']
-#     #     movie.release_date = resData['release_date']
-#     #     with open('./movies/fixtures/movies_data.json', 'w', encoding='utf-8') as file:
-#     #         json.dump(movie, file, indent="\t", ensure_ascii=False)
-#     #     # movie.runtime = resData.id
-#     #     # print(movie)
-#     #     # movie.save()
-
     create_genre_data()
     create_movie_data()
     return redirect('..')
@@ -158,5 +130,3 @@ def create_movie_data():
 
     with open('./movies/fixtures/movies.json', 'w', encoding='utf-8') as f:
         json.dump(movie_data, f, indent=4, ensure_ascii=False)
-
-
