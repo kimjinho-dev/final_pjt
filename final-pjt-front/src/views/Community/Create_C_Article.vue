@@ -1,21 +1,25 @@
 <template>
-  <form @submit.prevent="createArticle">
-    <div>
-      <label for="communityarticletitle">Title: </label>
-      <input
-        id="communityarticletitle"
-        type="text"
-        v-model.trim="communityarticletitle"
-      />
-      <br/>
-      <textarea
-        cols="30"
-        rows="10"
-        v-model="communityarticlecontent"
-      ></textarea>
-    </div>
-    <button type="submit">submit</button>
-  </form>
+  <div>
+    <h1>Create Article</h1>
+    <hr />
+    <form @submit.prevent="createArticle">
+      <div>
+        <label for="communityarticletitle">Title: </label>
+        <input
+          id="communityarticletitle"
+          type="text"
+          v-model.trim="communityarticletitle"
+        />
+        <br />
+        <textarea
+          cols="30"
+          rows="10"
+          v-model="communityarticlecontent"
+        ></textarea>
+      </div>
+      <button type="submit">submit</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -45,7 +49,7 @@ export default {
           tags: "#1",
         },
         headers: {
-          Authorization: "Token c457306e3e505a00a28dec8bc9e3a42b736368f3",
+          Authorization: `Token ${this.$store.state.token}`,
         },
       })
         .then((res) => {

@@ -6,6 +6,8 @@ import MoviesSearchResult from '@/views/Movies/MoviesSearchResult'
 import CommunityView from '../views/Community/CommunityView.vue'
 import Create_C_Article from '../views/Community/Create_C_Article.vue'
 import Detail_C_Article from '../views/Community/Detail_C_Article.vue'
+import LoginView from '../views/Account/LoginView.vue'
+import SignupView from '../views/Account/SignupView.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,16 @@ const routes = [
     path: '/community/:id',
     name: 'DetailCommunityArticle',
     component: Detail_C_Article
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginView
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: SignupView
   }
 ]
 
