@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
     SAVE_TOKEN(state, token) {
       state.token = token
-      router.push({ name: 'CommunityView' })
+      router.push({ name: 'Community' })
     }
   },
   actions: {
