@@ -57,9 +57,14 @@ release_data = 개봉일자
 - 추천영화 클릭시 detail 페이지 이동  
 - movie detail axios get & 출력  
 - sns POST 메서드 수정  
-  
-1119-1647: Front(account) update  
+
+---  
+## 1119-1647: Front(account) update  
   
 <front>  
 - login, signup 페이지, router, store 함수 작성  
-- account, article axios 에러 발생 중 (도와주세요.)  
+- account, article axios 에러 발생 중 (도와주세요.) 
+
+## 1119-2147: Front update
+  - login, signup 완료
+  - logout 구현 완료
