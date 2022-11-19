@@ -3,15 +3,32 @@
     <nav>
       <router-link :to="{ name: 'Movies' }">Movies</router-link> |
       <router-link :to="{ name: 'Community' }">Community</router-link> |
-      <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-      <router-link :to="{ name: 'Login' }">Login</router-link>
+      <router-link
+        v-if="this.$store.getters.getUserToken === null"
+        :to="{ name: 'Signup' }"
+        >Signup</router-link
+      >
+      |
+      <router-link
+        v-if="this.$store.getters.getUserToken === null"
+        :to="{ name: 'Login' }"
+        >Login</router-link
+      >
+      <button v-else @click="logout">Logout</button>
+      <p>{{ this.$store.getters.getUserToken }}</p>
     </nav>
     <router-view />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch("logOut");
+    },
+  },
+};
 </script>
 
 

@@ -17,6 +17,9 @@ export default new Vuex.Store({
     token: null,
   },
   getters: {
+    getUserToken(state) {
+      return state.token
+    }
   },
   mutations: {
     CREATE_COMMUNITY_ARTICLE(state, data) {
@@ -29,6 +32,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'Community' })
+    },
+    LOGOUT(state) {
+      state.token = null
     }
   },
   actions: {
@@ -50,6 +56,7 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
+          console.log(res.data.key)
           context.commit('SAVE_TOKEN', res.data.key)
         })
         .catch(() => {
@@ -69,6 +76,10 @@ export default new Vuex.Store({
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
         })
+    },
+    // 로그아웃
+    logOut({ commit }) {
+      commit('LOGOUT')
     }
   },
   modules: {
