@@ -1,8 +1,8 @@
-1117-0250: Front update했습니다.  
+## 1117-0250: Front update했습니다.  
 
-<hr>
+---
 
-1118-1130: Back update & organize code
+## 1118-1130: Back update & organize code
 - 게시글 & 해시태그 모델링(정상 입력확인)  
 - 게시글 조회 정상작동  
 - 게시글 상세조회 및 삭제 정상작동(수정기능은 검토필요, 태그기능 때문에 간단하지않음)  
@@ -43,10 +43,7 @@ poster_path = 포스터 url. `https://image.tmdb.org/t/p/{w500 or original}/{pos
 vote_average = 평점(소수점)  
 release_data = 개봉일자  
 
-
-<hr>
-
-1118-1820: Back update & Front(movie) update  
+## 1118-1820: Back update & Front(movie) update  
   
 <back>  
 - SNS POST data 수신 오류 해결  
