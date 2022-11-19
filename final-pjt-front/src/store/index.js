@@ -6,7 +6,7 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
-const API_URL = 'http://127.0.0.1:8000/'
+const API_URL = 'http://127.0.0.1:8000'
 
 export default new Vuex.Store({
   plugins: [
@@ -42,7 +42,7 @@ export default new Vuex.Store({
     signUp(context, payload) {
       axios({
         method: 'post',
-        url: `${API_URL}/accounts/signup`,
+        url: `${API_URL}/accounts/signup/`,
         data: {
           username: payload.username,
           password1: payload.password1,
@@ -52,12 +52,15 @@ export default new Vuex.Store({
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
         })
+        .catch(() => {
+          console.log('에러입니다')
+        })
     },
     // 로그인
     logIn(context, payload) {
       axios({
         method: 'post',
-        url: `${API_URL}/accounts/login`,
+        url: `${API_URL}/accounts/login/`,
         data: {
           username: payload.username,
           password: payload.password,
