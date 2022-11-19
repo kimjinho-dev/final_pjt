@@ -1,13 +1,14 @@
 <template>
   <div>
-    <h1>movieDetail</h1>
-    <p>영화제목 : {{ movie?.title }}</p>
-    <p>줄거리 : {{ movie?.overview }}</p>
-    <p>포스터 : 
-      <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
-    </p>
-    <p>평점 : {{ movie?.vote_average }}</p>
-    <p>개봉일자 : {{ movie?.release_data }}</p>
+    <b-container style="width:726px">
+      <h1>{{ movie?.title }}</h1>
+      <p>줄거리 : {{ movie?.overview }}</p>
+      <p>포스터 : 
+        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
+      </p>
+      <p>평점 : {{ movie?.vote_average }}</p>
+      <p>개봉일자 : {{ movie?.release_date }}</p>
+    </b-container>
   </div>
 </template>
 

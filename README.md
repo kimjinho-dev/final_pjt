@@ -29,26 +29,28 @@
     
   
 모델별 데이터값(데이터 요청 및 사용시 참고)  
-<community post,get>  
+\<community post,get\>  
 title : 100자 제한(not null)  
 content : 제한없음(not null)   
 tags : #으로 구분됨(blank true)  
 유저토큰헤더 =  
 `headers: {Authorization: Token {usertoken}}` 
   
-<movie (한글 제공)>  
+\<movie (한글 제공)\>  
 title = 제목  
 overview = 줄거리(빈값일수도있음)  
 poster_path = 포스터 url. `https://image.tmdb.org/t/p/{w500 or original}/{poster_path}` 형태로 사용  
 vote_average = 평점(소수점)  
 release_data = 개봉일자  
 
+---
+
 ## 1118-1820: Back update & Front(movie) update  
   
-<back>  
+\<back\>  
 - SNS POST data 수신 오류 해결  
   
-<front>  
+\<front\>  
 - movie 추천목록 axios get & 출력  
 - movie 추천목록 슬라이드 템플릿 구성  
 - 추천영화 클릭시 detail 페이지 이동  
@@ -58,10 +60,31 @@ release_data = 개봉일자
 ---  
 ## 1119-1647: Front(account) update  
   
-<front>  
-- login, signup 페이지, router, store 함수 작성  
-- account, article axios 에러 발생 중 (도와주세요.) 
+\<front\>  
 
-## 1119-2147: Front update
-  - login, signup 완료
-  - logout 구현 완료
+- login, signup 페이지, router, store 함수 작성    
+- account, article axios 에러 발생 중   (도와주세요.)   
+
+---
+
+## 1119-2147: Front update  
+  - login, signup 완료  
+  - logout 구현 완료  
+
+---
+
+## 1120-0055: Back & Front(movie) update
+
+\<back\>
+
+- SNS 태그 id -> 이름 데이터 전송
+- 게시글 수정 / 삭제 기능 구현
+- 태그 검색 기능 구현(postman에서 구현 성공)
+- 영화 검색 기능 구현(front쪽에서도 확인)
+- 영화 데이터 추가(기존 약 400개 -> 10000개)
+- flow 및 데이터 출력위치 조정
+
+\<front\>  
+
+- 영화 검색 기능 구현(실사용 가능)
+- 영화 상세 정보 페이지 모델 수정(개봉일자 추가)

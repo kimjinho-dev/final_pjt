@@ -23,7 +23,7 @@ const routes = [
     component: MovieDetail,
   },
   {
-    path: '/movies/searchresult',
+    path: '/movies/searchresult/:searchData',
     name: 'searchresult',
     component: MoviesSearchResult,
   },

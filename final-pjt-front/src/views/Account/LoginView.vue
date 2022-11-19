@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     logIn() {
+  
       const username = this.username;
       const password = this.password;
 

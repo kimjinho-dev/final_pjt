@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h1>Community</h1>
-    <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
-    <hr />
-    <div v-for="article in articles" :key="article.id">
-      {{article.title}}
-      {{article.content}}
-      {{article.tags}}
-    </div>
-    <CommunityList />
+    <b-container style="width:726px">
+      <h1>Community</h1>
+      <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
+      <hr />
+      <div v-for="article in articles" :key="article.id">
+        {{article.title}}
+        {{article.content}}
+        {{article.tags}}
+      </div>
+      <CommunityList />
+    </b-container>
   </div>
 </template>
 

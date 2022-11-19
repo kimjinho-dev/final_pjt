@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
     LOGOUT(state) {
       state.token = null
-    }
+    },
   },
   actions: {
     createCommunityArticle(context, data) {
@@ -74,13 +74,14 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
+          console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
     // 로그아웃
     logOut({ commit }) {
       commit('LOGOUT')
-    }
+    },
   },
   modules: {
   }

@@ -10,14 +10,15 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import CommunityListSerializer, CommunitySerializer
+from .serializers import CommunityListSerializer, CommunitySerializer, CommunityTagSerializer
 from .models import Community, CommunityTag
 
 
 @api_view(['GET', 'POST'])
+
 def community_list(request):
     if request.method == 'GET':
-        community = Community.objects.all()
+        community = Community.objects.order_by('-pk')
         serializer = CommunityListSerializer(community, many=True)
         return Response(serializer.data)
 
@@ -49,15 +50,39 @@ def community_detail(request, community_pk):
         return Response(serializer.data)
     
     elif request.method == 'DELETE':
-        community.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user == community.user:
+            community.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
-    # elif request.method == 'PUT':
-    #     serializer = CommunitySerializer(community, data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data)
+    elif request.method == 'PUT':
+        if request.user == community.user:
+            community = get_object_or_404(Community, pk=community_pk)
+            community.title=request.data.get('title','')
+            community.content=request.data.get('content','')
+            tags_list = request.data.get('tags').split('#')
+            community.tags.clear()
+            for tag in tags_list: 
+                if tag:
+                    tag = tag.strip()
+                    t, _ = CommunityTag.objects.get_or_create(name=tag)
+                    # tags내용이 없으면 넣는다, 아니면 2번째값으로 false반환하지만 현재에는 의미가 없으므로 둘다 빈값
+                    community.tags.add(t)
+                    # tags 추가(m:m)
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])    
+def tag_research_pk(request,tag_pk):
+    tag = get_object_or_404(CommunityTag, pk=tag_pk)
+    serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def tag_research_str(request,tag_str):
+    tag_pk = get_object_or_404(CommunityTag, name=tag_str).id
+    tag = get_object_or_404(CommunityTag, pk=tag_pk)
+    serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
+    return Response(serializer.data)
 
 # 댓글부분
 

@@ -65,6 +65,17 @@ def genre(request,genre_id): # 해당 장르에 맞는 영화 출력
     serializer = MovieSerializer(genre.movies.all(), many=True)  
     return Response(serializer.data)
 
+@api_view(['GET'])
+def movie_search(request,text): # 해당 제목에 맞는 영화 출력
+    movies = get_list_or_404(Movie)
+    text = text.replace(" ", "")
+    movie_list = []
+    for movie in movies:
+        if movie.title.replace(" ", "").find(text) != -1:
+            movie_list.append(movie)
+    serializer = MovieListSerializer(movie_list,many=True)
+    return Response(serializer.data)
+
 # @api_view(['GET'])
 # def smilar(request,movie_id): # 해당 영화와 비슷한 영화 출력(이건 뷰에서하는게 좋을거같은데?)
 #     raw_data = requests.get(url.get_smilarMovie_url(movieId=movie_id))
@@ -104,7 +115,7 @@ def create_movie_data():
 
     movie_data = []
     # for page in range(1, 501):
-    for page in range(1, 10):
+    for page in range(1, 501):
         raw_data = requests.get(url.get_movie_url(page=page))
         json_data = raw_data.json()
         movies = json_data.get('results')
@@ -120,7 +131,7 @@ def create_movie_data():
             movie.pop('backdrop_path')
             movie.pop('video')
             movie.pop('vote_count')
-            # movie['like_users'] = []
+            movie['like_users'] = []
             tmp = {
                 'model': 'movies.movie',
                 'pk': movie.pop('id'),

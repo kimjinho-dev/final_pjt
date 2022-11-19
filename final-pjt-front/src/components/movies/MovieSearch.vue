@@ -1,18 +1,16 @@
 <template>
   <div>
-    <h1>영화검색</h1>
     <b-form-input 
-      id="type-search"   
-      :type="type"    
       v-model="searchData"
       placeholder="검색할 영화를 입력해주세요"
-      @keyup.enter="search(searchData)"  
+      @keyup.enter="movieSearch(searchData)"  
       ></b-form-input>
-      searchData:{{searchData}}
+      <br>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -20,8 +18,8 @@ export default {
     }
   },
   methods: {
-    search() {
-
+    movieSearch(searchData) {
+      this.$router.push({name: 'searchresult', params:{searchData:searchData}})
     }
   },
 }
