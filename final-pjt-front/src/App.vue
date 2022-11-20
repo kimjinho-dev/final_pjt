@@ -8,6 +8,7 @@
         :to="{ name: 'Signup' }"
         >Signup</router-link
       >
+      <router-link v-else :to="{ name: 'Profile' }">Profile</router-link>
       |
       <router-link
         v-if="this.$store.getters.getUserToken === null"
@@ -15,7 +16,7 @@
         >Login</router-link
       >
       <button v-else @click="logout">Logout</button>
-      <p>{{ this.$store.getters.getUserToken }}</p>
+      <p>환영합니다 {{ this.$store.getters.getUserName }}</p>
     </nav>
     <router-view />
   </div>
