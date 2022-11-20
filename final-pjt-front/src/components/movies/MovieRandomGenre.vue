@@ -1,11 +1,18 @@
 <template>
   <div>
     <h1>MovieRandomGenre</h1>
-    <VueSlickCarousel v-bind="settings">
-      <div v-for="image in tempdata" :key="image.id">
-        <b-img thumbnail fluid :src="`${image.src}`"></b-img>
-      </div>
-    </VueSlickCarousel>
+    <div v-for="(movies,index) in three_movies" :key="index">
+      <h1>{{genres[index]}} 장르추천</h1>
+      <VueSlickCarousel v-bind="settings" v-if="movies.length">        
+        <div v-for="movie in movies" :key="movie.id">
+          <b-img thumbnail
+          height="300px" width="200px"
+          :src="`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`" 
+          @click="moveDetail(movie.id)">
+        </b-img>
+        </div>
+      </VueSlickCarousel>
+    </div>
   </div>
 </template>
 
@@ -14,30 +21,49 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   data() {
     return {
       settings: {
         "dots": false,
+        "focusOnSelect": true,
         "infinite": false,
-        "initialSlide": 2,
         "speed": 500,
         "slidesToShow": 3,
-        "slidesToScroll": 1,
-        "swipeToSlide": true
+        "slidesToScroll": 3,
+        "touchThreshold": 5
       },
-      tempdata: [
-        {id:1, src:'https://img1.daumcdn.net/thumb/C300x430/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F4127deb531fea9b766461efb61da18af55697d3c'},
-        {id:2, src:'https://an2-img.amz.wtchn.net/image/v2/nV_paIE6IwxSBGsVh1DbGw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk56STVlREV3T0RCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4eE5qTTBPRGd4TWpnMk5UazFOams1T0RFeEluMC5vaXhoNTVPTHhzcVZIeEdiUUNaVjFOSUdNRXhpTDFOR3FHM0E1RXFCLXNR'},
-        {id:3, src:'https://an2-img.amz.wtchn.net/image/v2/tMV4xweIwBYwOmYwBwJwvg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk56STVlREV3T0RCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4eE5qTXhNek16TkRrek5EY3dORFF5TnpjNEluMC5IQUtCYUVEQ2FsX0FvbHIxU1dMVFdDeC1pbkJWakd0RDZaYXZteHJMYXZF'},
-        {id:4, src:'https://an2-img.amz.wtchn.net/image/v2/9tjaINfC3poXuaW3vIA11w.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk56STVlREV3T0RCeE9EQWlYU3dpY0NJNklpOTJNaTl6ZEc5eVpTOXBiV0ZuWlM4eE5qTXhNek15T1RZek5URTFNREkyT0RRMUluMC5DR1dsaGdQWlVZWkl0UFFERF9WbWFaUTFpQ1lkMkFvaVpya1JOX1U0UHpV'},
-      ],
+      three_movies: [],
+      genres: [],
     }
   },
   components: { 
     VueSlickCarousel, 
   },
+  methods: {
+    moveDetail(id) {
+      this.$router.push({name: 'movieDetail', params:{movie_id:id}})
+    },
+    getRandomGenreMovieList() {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v2/movies/movie_random_genre/`
+      })
+        .then((res) => {
+          this.three_movies = res.data.slice(0,3)
+          this.genres = res.data[3]
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+  },
+  created() {
+    this.getRandomGenreMovieList()
+  }
 }
 </script>
 

@@ -1,23 +1,30 @@
 <template>
-  <b-container style="width: 726px">
-    <h1>Community</h1>
-    <CommunitySearch />
-    <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
-    <hr />
-    <div v-for="article in articles" :key="article.id">
-      <p>{{ article.title }}</p>
-      <p>{{ article.content }}</p>
-      <p>{{ article.tags }}</p>
-      <router-link
-        :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }"
-        >[Detail]</router-link
-      >
-      |
-      <button @click="deleteArticle">Delete</button>
+  <div>
+    <b-container style="width: 726px">
+      <h1>Community</h1>
+      <CommunitySearch />
+      <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
       <hr />
-    </div>
-    <CommunityList />
-  </b-container>
+      <b-container v-for="article in articles" :key="article.id">
+        <p>{{ article.title }}</p>
+        <p>{{ article.content }}</p>
+        <p>{{ article.tags }}</p>
+        <router-link
+          :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }"
+          >[Detail]</router-link
+        >
+        |
+        <button @click="deleteArticle">Delete</button>
+      </b-container>
+      <hr />
+      <div v-for="article in articles" :key="article.id">
+        {{article.title}}
+        {{article.content}}
+        {{article.tags}}
+      </div>
+      <CommunityList />
+    </b-container>
+  </div>
 </template>
 
 <script>

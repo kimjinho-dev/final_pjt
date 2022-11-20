@@ -71,11 +71,11 @@ def community_detail(request, community_pk):
             return Response(status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])    
-def tag_research_pk(request,tag_pk):
-    tag = get_object_or_404(CommunityTag, pk=tag_pk)
-    serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])    
+# def tag_research_pk(request,tag_pk):
+#     tag = get_object_or_404(CommunityTag, pk=tag_pk)
+#     serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
+#     return Response(serializer.data)
 
 @api_view(['GET'])
 def tag_research_str(request,tag_str):
@@ -115,7 +115,6 @@ def tag_research_str(request,tag_str):
 #             return Response(serializer.data)
   
 
-
 # @api_view(['POST'])
 # def comment_create(request, article_pk):
 #     # article = Article.objects.get(pk=article_pk)
@@ -124,3 +123,5 @@ def tag_research_str(request,tag_str):
 #     if serializer.is_valid(raise_exception=True):
 #         serializer.save(article=article)
 #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+

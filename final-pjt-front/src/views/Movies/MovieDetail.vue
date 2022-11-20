@@ -3,8 +3,13 @@
     <b-container style="width:726px">
       <h1>{{ movie?.title }}</h1>
       <p>줄거리 : {{ movie?.overview }}</p>
+      장르 : 
+        <span v-for="genre in movie?.genre_ids" 
+        :key="genre.id">
+        {{genre.name}}
+      </span>
       <p>포스터 : 
-        <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
+        <img :src="`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`" alt="">
       </p>
       <p>평점 : {{ movie?.vote_average }}</p>
       <p>개봉일자 : {{ movie?.release_date }}</p>

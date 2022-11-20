@@ -22,4 +22,10 @@ class CommunityTag(models.Model):
 #     created_at = models.DateTimeField(auto_now_add=True)
 #     updated_at = models.DateTimeField(auto_now=True)
 
-    
+# class Profile(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # user 모델과 1:N 매칭
+#     nickname = models.CharField(max_length=20)
+
+
+#     def __str__(self):
+#         return self.name

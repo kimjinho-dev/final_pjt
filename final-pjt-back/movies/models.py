@@ -12,6 +12,7 @@ class Movie(models.Model):
     vote_average = models.FloatField(null=True)  # 평점
     release_date = models.TextField(null=True)  # 개봉일자
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='movie', blank=True,)
+    popularity = models.FloatField(null=True)   # 인기도(추후 정렬시 사용)
     # runtime = models.IntegerField()           # 상영시간(detail 추출필요)
 
 
