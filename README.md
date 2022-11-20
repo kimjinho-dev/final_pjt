@@ -88,3 +88,10 @@ release_data = 개봉일자
 
 - 영화 검색 기능 구현(실사용 가능)
 - 영화 상세 정보 페이지 모델 수정(개봉일자 추가)
+
+## 1120-1712: Front update
+  - community User ID 출력 완료
+  - community 검색창 출력 완료
+  - ProfileView 작성 중
+    - UserProfile component 연결 완료
+    - UserArticle component 틀 작성, 연결 완료

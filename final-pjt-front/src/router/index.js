@@ -8,6 +8,7 @@ import Create_C_Article from '../views/Community/Create_C_Article.vue'
 import Detail_C_Article from '../views/Community/Detail_C_Article.vue'
 import LoginView from '../views/Account/LoginView.vue'
 import SignupView from '../views/Account/SignupView.vue'
+import ProfileView from '../views/Account/ProfileView.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,7 @@ const routes = [
     component: MovieDetail,
   },
   {
-    path: '/movies/searchresult/:searchData',
+    path: '/movies/searchresult',
     name: 'searchresult',
     component: MoviesSearchResult,
   },
@@ -51,6 +52,11 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: SignupView
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfileView
   }
 ]
 

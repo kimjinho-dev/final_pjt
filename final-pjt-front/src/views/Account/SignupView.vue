@@ -2,13 +2,13 @@
   <div>
     <h1>회원가입 페이지입니다</h1>
     <form @submit.prevent="signUp">
-      <label for="username">이름 : </label>
+      <label for="username">ID : </label>
       <input type="text" id="username" v-model="username" /><br />
 
-      <label for="password1"> 비밀번호 : </label>
+      <label for="password1">Password : </label>
       <input type="password" id="password1" v-model="password1" /><br />
 
-      <label for="password2"> 비밀번호 재확인 : </label>
+      <label for="password2">Password : </label>
       <input type="password" id="password2" v-model="password2" />
 
       <input type="submit" value="SignUp" />

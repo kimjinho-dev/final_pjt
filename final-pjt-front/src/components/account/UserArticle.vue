@@ -1,9 +1,6 @@
 <template>
-  <b-container style="width: 726px">
-    <h1>Community</h1>
-    <CommunitySearch />
-    <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
-    <hr />
+  <div>
+    <h3>UserArticle이 출력되는 자리입니다.</h3>
     <div v-for="article in articles" :key="article.id">
       <p>{{ article.title }}</p>
       <p>{{ article.content }}</p>
@@ -16,28 +13,22 @@
       <button @click="deleteArticle">Delete</button>
       <hr />
     </div>
-    <CommunityList />
-  </b-container>
+  </div>
 </template>
 
 <script>
-import CommunityList from "@/components/community/CommunityList";
-import CommunitySearch from "@/components/community/CommunitySearch";
 import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
-  name: "CommunityView",
+  name: "UserArticle",
 
   data() {
     return {
       articles: null,
     };
   },
-  components: {
-    CommunityList,
-    CommunitySearch,
-  },
+  components: {},
   methods: {
     deleteArticle() {
       this.$store.dispatch("deleteCommunityArticle", this.article);
@@ -61,3 +52,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

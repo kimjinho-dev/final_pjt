@@ -2,10 +2,10 @@
   <div>
     <h1>로그인 페이지입니다.</h1>
     <form @submit.prevent="logIn">
-      <label for="username">username : </label>
+      <label for="username">ID : </label>
       <input type="text" id="username" v-model="username" /><br />
 
-      <label for="password"> password : </label>
+      <label for="password">Password : </label>
       <input type="password" id="password" v-model="password" /><br />
 
       <input type="submit" value="logIn" />
@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     logIn() {
-  
       const username = this.username;
       const password = this.password;
 

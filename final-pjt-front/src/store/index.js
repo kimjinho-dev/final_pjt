@@ -14,11 +14,15 @@ export default new Vuex.Store({
   ],
   state: {
     communityArticles: [],
+    username: null,
     token: null,
   },
   getters: {
     getUserToken(state) {
       return state.token
+    },
+    getUserName(state) {
+      return state.username
     }
   },
   mutations: {
@@ -29,13 +33,17 @@ export default new Vuex.Store({
       const index = state.communityArticles.indexOf(data)
       state.communityArticles.splice(index, 1)
     },
+    SAVE_USERNAME(state, username) {
+      state.username = username
+    },
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'Community' })
     },
     LOGOUT(state) {
-      state.token = null
-    },
+      state.token = null;
+      state.username = null;
+    }
   },
   actions: {
     createCommunityArticle(context, data) {
@@ -65,6 +73,7 @@ export default new Vuex.Store({
     },
     // 로그인
     logIn(context, payload) {
+      const username = payload.username
       axios({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
@@ -74,14 +83,15 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          console.log(res)
+          console.log(username)
+          context.commit('SAVE_USERNAME', username)
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
     // 로그아웃
     logOut({ commit }) {
       commit('LOGOUT')
-    },
+    }
   },
   modules: {
   }

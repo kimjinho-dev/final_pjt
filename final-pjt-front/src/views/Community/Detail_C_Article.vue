@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <b-container style="width: 726px">
     <h1>Detail</h1>
     <p>{{ article?.id }}</p>
     <p>{{ article?.title }}</p>
     <p>{{ article?.content }}</p>
-  </div>
+  </b-container>
 </template>
 
 <script>

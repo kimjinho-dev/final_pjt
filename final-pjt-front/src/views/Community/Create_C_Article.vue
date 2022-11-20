@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container style="width: 726px">
     <h1>Create Article</h1>
     <hr />
     <form @submit.prevent="createArticle">
@@ -16,10 +16,18 @@
           rows="10"
           v-model="communityarticlecontent"
         ></textarea>
+        <br />
+        <label for="communityarticletags">Tags: </label>
+        <input
+          id="communityarticletags"
+          placeholder="#태그1 #태그2"
+          type="text"
+          v-model.trim="communityarticletags"
+        />
       </div>
       <button type="submit">submit</button>
     </form>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -32,6 +40,7 @@ export default {
     return {
       communityarticletitle: null,
       communityarticlecontent: null,
+      tags: null,
     };
   },
   methods: {
@@ -46,7 +55,7 @@ export default {
         data: {
           title: this.communityarticletitle,
           content: this.communityarticlecontent,
-          tags: "#1",
+          tags: this.communityarticletags,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`,
