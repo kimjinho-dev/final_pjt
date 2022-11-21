@@ -8,22 +8,30 @@
       >
       <hr />
       <b-container v-for="article in articles" :key="article.id">
-        <p>{{ article.title }}</p>
-        <p>{{ article.content }}</p>
-        <span v-for="tag in article.tags" :key="tag.id">#{{ tag.name }} </span>
-        <router-link
-          :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }"
-          >[Detail]</router-link
-        >
+        <div>
+          <b-card-group deck>
+            <!-- <span v-for="tag in article.tags" :key="tag.id">#{{ tag.name }} </span> -->
+            <b-card
+              header-tag="header"
+              footer="tags"
+              footer-tag="footer"
+              :title="getTitle(article)"
+            >
+              <b-card-text>{{ article.content }}</b-card-text>
+              <b-button :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }">Detail</b-button> |
+              <b-button v-b-modal.modal-1>Detail</b-button>
+            </b-card>
+          </b-card-group>
         <hr />
+        </div>
       </b-container>
-      <CommunityList />
     </b-container>
+    <b-modal id="modal-1" title="BootstrapVue">
+    </b-modal>
   </div>
 </template>
 
 <script>
-import CommunityList from "@/components/community/CommunityList";
 import CommunitySearch from "@/components/community/CommunitySearch";
 import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
@@ -37,7 +45,6 @@ export default {
     };
   },
   components: {
-    CommunityList,
     CommunitySearch,
   },
   methods: {
@@ -53,6 +60,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    getTitle(article) {
+      return article.title
     },
   },
   created() {
