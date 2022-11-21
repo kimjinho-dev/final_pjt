@@ -2,9 +2,7 @@
   <b-container style="width: 726px">
     <h1>{{ this.$store.state.username }} 프로필 페이지</h1>
     <hr />
-    <div>
-      <UserProfile />
-    </div>
+    <div><UserProfile /></div>
     <hr />
     <div>
       <UserArticle />

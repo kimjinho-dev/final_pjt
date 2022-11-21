@@ -3,25 +3,20 @@
     <b-container style="width: 726px">
       <h1>Community</h1>
       <CommunitySearch />
-      <router-link :to="{ name: 'CreateCommunityArticle' }">[create]</router-link>
+      <router-link :to="{ name: 'CreateCommunityArticle' }"
+        >[create]</router-link
+      >
       <hr />
       <b-container v-for="article in articles" :key="article.id">
         <p>{{ article.title }}</p>
         <p>{{ article.content }}</p>
-        <p>{{ article.tags }}</p>
+        <span v-for="tag in article.tags" :key="tag.id">#{{ tag.name }} </span>
         <router-link
           :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }"
           >[Detail]</router-link
         >
-        |
-        <button @click="deleteArticle">Delete</button>
+        <hr />
       </b-container>
-      <hr />
-      <div v-for="article in articles" :key="article.id">
-        {{article.title}}
-        {{article.content}}
-        {{article.tags}}
-      </div>
       <CommunityList />
     </b-container>
   </div>
@@ -46,9 +41,6 @@ export default {
     CommunitySearch,
   },
   methods: {
-    deleteArticle() {
-      this.$store.dispatch("deleteCommunityArticle", this.article);
-    },
     get_articles() {
       axios({
         method: "GET",

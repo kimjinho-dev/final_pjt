@@ -4,7 +4,7 @@
     <div v-for="article in articles" :key="article.id">
       <p>{{ article.title }}</p>
       <p>{{ article.content }}</p>
-      <p>{{ article.tags }}</p>
+      <span v-for="tag in article.tags" :key="tag.id">#{{ tag.name }} </span>
       <router-link
         :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }"
         >[Detail]</router-link
@@ -36,7 +36,7 @@ export default {
     get_articles() {
       axios({
         method: "GET",
-        url: `${API_URL}/api/v1/community/`,
+        url: `${API_URL}/api/v3/profile/post/${this.$store.state.username}`,
       })
         .then((res) => {
           console.log(res);
