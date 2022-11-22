@@ -129,3 +129,9 @@ release_data = 개봉일자
 - api/v3/ - profile  
   - `profile/<str:username>/` , GET - 유저 정보 요청
   - `community/post/<str:username>/` , GET - 유저가 작성한 sns 글 목록 요청
+
+## 1122-1708: front update
+  - 커뮤니티, 프로필 게시물 edit, detail 모달창 구현
+  - 게시글 생성 모달창으로 구현 예정
+  - 개인 프로필 컴포넌트 생성 예정
+  - 태그 검색창 구현 예정
