@@ -2,6 +2,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.urls import path
 from . import views, tests
 
+
 urlpatterns = [
     path('movies/', views.movies),
     path('dataget/', views.dumpMovieDataGet),

@@ -23,13 +23,20 @@ def community_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        # print(request.POST)
+        # print(type(request.FILES))
+        print(request.FILES['image'])
+        # print(type(request.FILES['image']))
         tags_list = request.data.get('tags').split('#')
         # #으로 내용 구분. 추후에 공백제거처리
         community = Community.objects.create(
             user=request.user,
             title=request.data.get('title',''),
             content=request.data.get('content',''),
+            image=request.FILES['image']
+            # image=request.__getitem__('image')
         )
+        # print(community)
         for tag in tags_list: 
             if tag:
                 tag = tag.strip()
@@ -46,7 +53,7 @@ def community_detail(request, community_pk):
 
     if request.method == 'GET':
         serializer = CommunitySerializer(community)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
     
     elif request.method == 'DELETE':
@@ -68,6 +75,7 @@ def community_detail(request, community_pk):
                     # tags내용이 없으면 넣는다, 아니면 2번째값으로 false반환하지만 현재에는 의미가 없으므로 둘다 빈값
                     community.tags.add(t)
                     # tags 추가(m:m)
+            community.save()
             return Response(status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

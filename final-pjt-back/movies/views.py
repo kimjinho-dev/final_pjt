@@ -96,6 +96,33 @@ def movie_random_genre(request,): # 해당 장르에 맞는 영화 출력
     # # serializer = MovieListSerializer(movie_list, many=True) 
     return Response(data=[serializer1.data,serializer2.data,serializer3.data,genre_name_list])
 
+# @api_view(['GET'])
+# def tag_random(request): # 랜덤 태그로 보여주기
+#     for tag in Tag.objects.all():
+#         genres.append(genre)
+#     random_genres = random.sample(genres,3)
+#     serializer1 = MovieListSerializer(Genre.objects.get(pk=random_genres[0].id).movies.order_by("-popularity", "-vote_average")[:10], many=True)
+#     genre_name_list.append(random_genres[0].name)
+#     serializer2 = MovieListSerializer(Genre.objects.get(pk=random_genres[1].id).movies.order_by("-popularity", "-vote_average")[:10], many=True)
+#     genre_name_list.append(random_genres[1].name)
+#     serializer3 = MovieListSerializer(Genre.objects.get(pk=random_genres[2].id).movies.order_by("-popularity", "-vote_average")[:10], many=True)
+#     genre_name_list.append(random_genres[2].name)
+#     # for random_genre in random_genres:
+#     #     genre = Genre.objects.get(pk=random_genre).movies.all()
+#     #     # movie_list = Genre.objects.filter(movies=random_genre)
+#     #     movie_list.append(MovieListSerializer(movie_list, many=True))
+#     #     print(Genre.objects.get(pk=random_genre).movies.all())
+#     #     # print(MovieListSerializer(movie_list, many=True))
+#     #     # genre = get_object_or_404(Genre, pk=random_genre)
+#     #     # cnt = 10
+#     #     # for movie in genre.movies.order_by("-vote_average"):
+#     #     #     print(movie_list)
+#     #     #     print(movie)
+#     #     #     movie_list.add(movie)
+#     # # genre = get_object_or_404(Genre, pk=genre_id)
+#     # # serializer = MovieListSerializer(movie_list, many=True) 
+#     return Response(data=[serializer1.data,serializer2.data,serializer3.data,genre_name_list])
+
 @api_view(['GET'])
 def get_toprated(request): # 평점최고작
     raw_data = requests.get(url.get_toprated_url())
@@ -164,7 +191,9 @@ def create_movie_data():
         movies = json_data.get('results')
 
         for movie in movies:
-            if movie.get('release_date') == "" or movie.get('poster_path') == "":
+            if (movie.get('release_date') == "" or 
+                movie.get('poster_path') == "" or
+                movie.get('adlut') == False):
                 continue
 
             movie.pop('adult')

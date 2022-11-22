@@ -17,7 +17,7 @@ class CommunityListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Community
         # fields = ('id', 'title', 'content')
-        fields = ('id', 'title', 'content', 'user', 'username', 'tags')
+        fields = ('id', 'title', 'content', 'user', 'username', 'tags', 'image')
         read_only_fields = ('user', )
 
 class CommunitySerializer(serializers.ModelSerializer):

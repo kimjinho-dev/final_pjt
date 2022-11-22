@@ -2,7 +2,7 @@
   <b-container style="width: 726px">
     <h1>Create Article</h1>
     <hr />
-    <form @submit.prevent="createArticle">
+    <form @submit.prevent="createArticle" enctype=“multipart/form-data”>
       <div>
         <label for="communityarticletitle">Title: </label>
         <input
@@ -24,6 +24,8 @@
           type="text"
           v-model.trim="communityarticletags"
         />
+        <br />
+        <input type="file" name="image" id="image" @change="selectImage"/>
       </div>
       <button type="submit">submit</button>
     </form>
@@ -41,6 +43,7 @@ export default {
       communityarticletitle: null,
       communityarticlecontent: null,
       tags: null,
+      image: null,
     };
   },
   methods: {
@@ -49,16 +52,25 @@ export default {
         alert("제목을 입력해주세요");
         return;
       }
+      const frm = new FormData();
+      // const photoFile = document.getElementById("photo");
+      // frm.append("photo", photoFile.files[0]);
+      frm.append("image", this.image);
+      frm.append("title", this.communityarticletitle)
+      frm.append("content", this.communityarticlecontent)
+      frm.append("tags", this.communityarticletags)
+      // if (this.iamge.length > -1) {
+      //   for (let i = 0; i < this.iamge.length; i++) {
+      //     const imageForm = this.image
+      //   }
+      // }
       axios({
         method: "POST",
         url: `${API_URL}/api/v1/community/`,
-        data: {
-          title: this.communityarticletitle,
-          content: this.communityarticlecontent,
-          tags: this.communityarticletags,
-        },
+        data: frm,
         headers: {
           Authorization: `Token ${this.$store.state.token}`,
+          'Content-Type': 'multipart/form-data',
         },
       })
         .then((res) => {
@@ -69,6 +81,9 @@ export default {
           console.log(err);
         });
     },
+    selectImage(e) {
+      this.image = e.target.files[0];
+    }
   },
 };
 </script>

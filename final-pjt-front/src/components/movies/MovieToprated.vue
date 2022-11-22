@@ -2,11 +2,11 @@
   <div>
     <h1>MovieToprated</h1>
     <VueSlickCarousel v-bind="settings" v-if="movies.length">
-      <div v-for="movie in movies" :key="movie.pk">
+      <div v-for="movie in movies" :key="movie.id">
         <b-img thumbnail
         height="300px" width="200px"
         :src="`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`" 
-        @click="moveDetail(movie.pk)">
+        @click="moveDetail(movie.id)">
       </b-img>
       </div>
     </VueSlickCarousel>
@@ -43,7 +43,7 @@ export default {
     moveDetail(id) {
       this.$router.push({name: 'movieDetail', params:{movie_id:id}})
     },
-    getPopularMovieList() {
+    getTopratedMovieList() {
       axios({
         method: 'get',
         url: `${API_URL}/api/v2/movies/toprated/`
@@ -57,11 +57,13 @@ export default {
     },
   },
   created() {
-    this.getPopularMovieList()
+    this.getTopratedMovieList()
   }
 }
 </script>
 
 <style>
-
+.slick-prev:before, .slick-next:before { 
+    color:rgb(7, 7, 7) !important;
+}
 </style>

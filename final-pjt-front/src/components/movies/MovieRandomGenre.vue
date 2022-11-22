@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>MovieRandomGenre</h1>
     <div v-for="(movies,index) in three_movies" :key="index">
       <h1>{{genres[index]}} 장르추천</h1>
       <VueSlickCarousel v-bind="settings" v-if="movies.length">        

@@ -128,10 +128,30 @@ release_data = 개봉일자
 
 - api/v3/ - profile  
   - `profile/<str:username>/` , GET - 유저 정보 요청
-  - `community/post/<str:username>/` , GET - 유저가 작성한 sns 글 목록 요청
+  - `profile/post/<str:username>/` , GET - 유저가 작성한 sns 글 목록 요청
+
+---
 
 ## 1122-1708: front update
   - 커뮤니티, 프로필 게시물 edit, detail 모달창 구현
   - 게시글 생성 모달창으로 구현 예정
   - 개인 프로필 컴포넌트 생성 예정
   - 태그 검색창 구현 예정
+
+---
+
+## 1122-1730: back&movie update
+
+\<back\> 
+
+- 이미지 업로드 기능 구현
+- 이미지 프론트쪽에서 출력 가능하도록 구현
+- 영화부분 영화 태그 게시글 출력되도록 구현
+- 영화 데이터 재구성
+
+\<fron\>
+
+- 영화 detail에서 해당 영화 태그로 작성된 글 출력
+- 영화 detail 기본 템플릿 구성
+- SNS 파일 input 구현
+- SNS 파일 출력 구현

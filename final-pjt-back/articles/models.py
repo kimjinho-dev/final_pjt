@@ -1,6 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+# def image_directory_path(instance, filename):
+#     return 'media/{0}/{1}'.format(instance.upload_user.username, filename)  # user를 upload_user로 저장했기 때문에 instance.upload_user로 사용함
+# def image_path(instance):
+#     return 'users/{0}'.format(instance.upload_user.username)
+
 class Community(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)    # user 모델과 1:N 매칭
     title = models.CharField(max_length=100)                                        # 제목
@@ -8,8 +13,10 @@ class Community(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)                            # 작성시간
     updated_at = models.DateTimeField(auto_now=True)                                # 업데이트 시간(수정기는 없으면 불필요)
     tags = models.ManyToManyField('CommunityTag', related_name='community', blank=True,)
-    image_id = models.TextField(null=True)                                                   # 저장된 사진 id
-    
+    image = models.ImageField(blank=True, upload_to='images', null=True)                                                   # 저장된 사진 id
+    # base64 = models.TextField(blank=True)
+
+
 class CommunityTag(models.Model):
     name = models.CharField(max_length=100)
 
