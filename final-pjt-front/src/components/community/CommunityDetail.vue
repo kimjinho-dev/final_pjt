@@ -5,12 +5,8 @@
     <p>{{ article?.title }}</p>
     <p>{{ article?.content }}</p>
     <p>{{ article?.tags }}</p>
-    <router-link
-      :to="{ name: 'EditCommunityArticle', params: { id: article.id } }"
-      >[Edit]</router-link
-    >
-    |
-    <button @click="deleteArticle">Delete</button>
+    <b-button @click="editState">Edit</b-button> |
+    <b-button @click.prevent="deleteArticle">Delete</b-button>
   </b-container>
 </template>
 
@@ -21,19 +17,23 @@ const API_URL = "http://127.0.0.1:8000";
 
 export default {
   name: "CommunityDetail",
+  props: {
+    id: String,
+  },
   data() {
     return {
       article: null,
     };
   },
   created() {
+    console.log(this.id)
     this.getArticleDetail();
   },
   methods: {
     getArticleDetail() {
       axios({
         method: "get",
-        url: `${API_URL}/api/v1/community/${this.$route.params.id}`,
+        url: `${API_URL}/api/v1/community/${this.id}`,
       })
         .then((res) => {
           console.log(res);
@@ -46,7 +46,7 @@ export default {
     deleteArticle() {
       axios({
         method: "DELETE",
-        url: `${API_URL}/api/v1/community/${this.$route.params.id}`,
+        url: `${API_URL}/api/v1/community/${this.id}`,
         data: {
           title: this.communityarticletitle,
           content: this.communityarticlecontent,
@@ -58,12 +58,16 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.$router.push({ name: "Community" });
+          this.$router.go();
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    editState() {
+      console.log("edit Change")
+      this.$emit("changeEditState")
+    }
   },
 };
 </script>

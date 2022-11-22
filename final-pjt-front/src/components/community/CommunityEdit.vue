@@ -25,7 +25,7 @@
           v-model.trim="communityarticletags"
         />
       </div>
-      <button type="submit">submit</button>
+      <b-button type="submit">submit</b-button>
     </form>
   </b-container>
 </template>
@@ -35,7 +35,10 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
-  name: "Create_C_Article",
+  name: "CommunityEdit",
+  props: {
+    id: String,
+  },
   data() {
     return {
       communityarticletitle: null,
@@ -51,7 +54,7 @@ export default {
     getArticleDetail() {
       axios({
         method: "get",
-        url: `${API_URL}/api/v1/community/${this.$route.params.id}`,
+        url: `${API_URL}/api/v1/community/${this.id}`,
       })
         .then((res) => {
           console.log(res);
@@ -68,7 +71,7 @@ export default {
       }
       axios({
         method: "PUT",
-        url: `${API_URL}/api/v1/community/${this.$route.params.id}/`,
+        url: `${API_URL}/api/v1/community/${this.id}/`,
         data: {
           title: this.communityarticletitle,
           content: this.communityarticlecontent,
@@ -80,7 +83,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.$router.push({ name: "Community" });
+          this.$emit("changeDetailState")
         })
         .catch((err) => {
           console.log(err);
