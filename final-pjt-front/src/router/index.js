@@ -5,6 +5,7 @@ import MovieDetail from '@/views/Movies/MovieDetail'
 import MoviesSearchResult from '@/views/Movies/MoviesSearchResult'
 import CommunityView from '../views/Community/CommunityView.vue'
 import Create_C_Article from '../views/Community/Create_C_Article.vue'
+import CommunitySearchResult from '../views/Community/CommunitySearchResult'
 import LoginView from '../views/Account/LoginView.vue'
 import SignupView from '../views/Account/SignupView.vue'
 import ProfileView from '../views/Account/ProfileView.vue'
@@ -36,6 +37,11 @@ const routes = [
     path: '/community/createarticle',
     name: 'CreateCommunityArticle',
     component: Create_C_Article
+  },
+  {
+    path: '/community/searchresult/:searchData',
+    name: 'CommunitySearchResult',
+    component: CommunitySearchResult
   },
   {
     path: '/login',
