@@ -22,7 +22,7 @@
       </b-container>
       <b-modal id="modal-1" title="BootstrapVue">
         <CommunityDetail v-if="state === 'Detail'" :id="this.id" @changeEditState="changeEditState" />
-        <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState" />
+        <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState" @getArticles="get_articles" />
       </b-modal>
   </div>
 </template>

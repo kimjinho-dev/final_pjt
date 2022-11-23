@@ -31,7 +31,7 @@
     </b-modal>
     <b-modal id="modal-2" title="BootstrapVue" hide-footer>
       <CommunityDetail v-if="state === 'Detail'" :id="this.id" @changeEditState="changeEditState" />
-      <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState"/>
+      <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState" @getArticles="get_articles" />
     </b-modal>
   </div>
 </template>
@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     get_articles() {
+      console.log("get_articles")
       axios({
         method: "GET",
         url: `${API_URL}/api/v1/community/`,

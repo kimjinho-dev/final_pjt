@@ -95,6 +95,9 @@ export default {
       })
         .then((res) => {
           console.log(res);
+          console.log("created")
+          this.$emit("getArticles")
+          console.log("changeDetail")
           this.$emit("changeDetailState")
         })
         .catch((err) => {
