@@ -47,8 +47,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff ;
+  /* background-color: #6C7A89; */
 }
+
+
 
 nav {
   padding: 30px;
@@ -60,6 +63,12 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #A3C6C4;
+}
+
+b-form-input {
+  background-color: #E0E7E9;
+  color: #354649,
 }
 </style>
+

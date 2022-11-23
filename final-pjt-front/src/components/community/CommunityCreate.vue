@@ -53,17 +53,10 @@ export default {
         return;
       }
       const frm = new FormData();
-      // const photoFile = document.getElementById("photo");
-      // frm.append("photo", photoFile.files[0]);
       frm.append("image", this.image);
       frm.append("title", this.communityarticletitle)
       frm.append("content", this.communityarticlecontent)
       frm.append("tags", this.communityarticletags)
-      // if (this.iamge.length > -1) {
-      //   for (let i = 0; i < this.iamge.length; i++) {
-      //     const imageForm = this.image
-      //   }
-      // }
       axios({
         method: "POST",
         url: `${API_URL}/api/v1/community/`,

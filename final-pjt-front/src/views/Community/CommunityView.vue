@@ -5,20 +5,26 @@
       <CommunitySearch />
       <b-button v-b-modal.modal-1>Create</b-button>
       <hr />
-      <b-container v-for="article in articles" :key="article.id">
+      <b-container v-for="article in articles" :key="article.id" style="color:black;text-align: start;">
         <div>
           <b-card-group deck>
             <b-card
               header-tag="header"
               footer-tag="footer"
-              :title="getTitle(article)"
             >
+              <template #header>
+                <span style="font-size:1.4em;">{{article.title}}</span>
+              </template>
               <b-card-text>
                 {{ article.content }}
-                <b-card-img :src="`http://localhost:8000${article.image}`" fluid-glow alt="None" style="object-fit:cover" class="rounded-0"></b-card-img>
-                <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
+                <br />
+                <b-button v-b-modal.modal-2 @click="getArticleIdState(article)">Detail</b-button>
+                <br />
               </b-card-text>
-              <b-button v-b-modal.modal-2 @click="getArticleIdState(article)">Detail</b-button>
+              <b-card-img :src="`http://localhost:8000${article.image}`" fluid-glow alt="None" style="object-fit:cover" class="rounded-0"></b-card-img>
+              <template #footer>
+                <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
+              </template>
             </b-card>
           </b-card-group>
         <hr />

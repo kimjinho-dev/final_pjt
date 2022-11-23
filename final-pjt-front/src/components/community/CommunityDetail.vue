@@ -1,8 +1,8 @@
 <template>
-  <b-container style="width: 726px">
+  <b-container>
     <h1>{{ article?.title }}</h1>
     <p>{{ article?.username }}</p>
-    <img :src="`http://localhost:8000${article.image}`"  alt="None" style="width:100%">
+    <img v-if="`${article.image}`" :src="`http://localhost:8000${article.image}`"  alt="None" style="width:100%">
     <p>{{ article?.content }}</p>
     <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
     <br />

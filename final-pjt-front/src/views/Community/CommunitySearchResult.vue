@@ -5,7 +5,11 @@
       <CommunitySearch />
       <b-button v-b-modal.modal-1>Create</b-button>
       <hr />
-      <b-container v-for="article in articles" :key="article.id">
+      <h1>{{$route.params.searchData}} 태그로 검색된 결과</h1>
+      <b-container v-if="articles.length < 1">
+        <h2>검색한 데이터 값이 없습니다</h2>
+      </b-container>
+      <b-container v-else v-for="article in articles" :key="article.id">
         <div>
           <b-card-group deck>
             <b-card
@@ -18,7 +22,7 @@
                 {{ article.content }}
                 <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
               </b-card-text>
-              <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
+              <b-card-img v-if="`${article.image}`" :src="`http://localhost:8000${article.image}`" alt="None" class="rounded-0"></b-card-img>
               <b-button v-b-modal.modal-2 @click="getArticleIdState(article)">Detail</b-button>
             </b-card>
           </b-card-group>
@@ -53,7 +57,7 @@ export default {
 
   data() {
     return {
-      articles: null,
+      articles: [],
       id: null,
       state: null,
     };

@@ -23,17 +23,17 @@ def community_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        # print(request.POST)
-        # print(type(request.FILES))
-        print(request.FILES['image'])
-        # print(type(request.FILES['image']))
+        if request.FILES:
+            image = request.FILES['image']
+        else:
+            image = ''
         tags_list = request.data.get('tags').split('#')
         # #으로 내용 구분. 추후에 공백제거처리
         community = Community.objects.create(
             user=request.user,
             title=request.data.get('title',''),
             content=request.data.get('content',''),
-            image=request.FILES['image']
+            image=image
             # image=request.__getitem__('image')
         )
         # print(community)
@@ -64,6 +64,8 @@ def community_detail(request, community_pk):
     elif request.method == 'PUT':
         if request.user == community.user:
             community = get_object_or_404(Community, pk=community_pk)
+            if request.FILES:
+                community.image = request.FILES['image']
             community.title=request.data.get('title','')
             community.content=request.data.get('content','')
             tags_list = request.data.get('tags').split('#')
@@ -87,10 +89,22 @@ def community_detail(request, community_pk):
 
 @api_view(['GET'])
 def tag_research_str(request,tag_str):
-    tag_pk = get_object_or_404(CommunityTag, name=tag_str).id
-    tag = get_object_or_404(CommunityTag, pk=tag_pk)
-    serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
-    return Response(serializer.data)
+    # tag_pk = CommunityTag.objects.filter(name=tag_str).exists()
+    # print(tag_pk)
+    if CommunityTag.objects.filter(name=tag_str).exists():
+        tag_pk = CommunityTag.objects.get(name=tag_str).id
+        tag = get_object_or_404(CommunityTag, pk=tag_pk)
+        serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
+        return Response(serializer.data)    
+    else:
+        serializer = CommunityListSerializer([],many=True)
+        return Response(serializer.data)    
+
+    # get_object_or_404(CommunityTag, name=tag_str).id
+    # # tag_pk = get_object_or_404(CommunityTag, name=tag_str).id
+    # tag = get_object_or_404(CommunityTag, pk=tag_pk)
+    # serializer = CommunityListSerializer(tag.community.order_by('-pk'), many=True)
+    # return Response(serializer.data)
 
 # 댓글부분
 

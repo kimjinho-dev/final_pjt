@@ -155,3 +155,18 @@ release_data = 개봉일자
 - 영화 detail 기본 템플릿 구성
 - SNS 파일 input 구현
 - SNS 파일 출력 구현
+
+---
+
+
+## 1123-1800: back&movie update
+
+\<back\> 
+
+- 게시글 put 관련 정리
+- 
+
+\<fron\>
+
+- 전체적 ui 개선
+- 영화 별점 정리
