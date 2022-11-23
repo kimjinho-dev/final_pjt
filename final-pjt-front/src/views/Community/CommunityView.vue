@@ -3,9 +3,7 @@
     <b-container style="width: 726px">
       <h1>Community</h1>
       <CommunitySearch />
-      <router-link :to="{ name: 'CreateCommunityArticle' }"
-        >[create]</router-link
-      >
+      <b-button v-b-modal.modal-1>Create</b-button>
       <hr />
       <b-container v-for="article in articles" :key="article.id">
         <div>
@@ -21,14 +19,17 @@
                 <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
                 <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
               </b-card-text>
-              <b-button v-b-modal.modal-1 @click="getArticleIdState(article)">Detail</b-button>
+              <b-button v-b-modal.modal-2 @click="getArticleIdState(article)">Detail</b-button>
             </b-card>
           </b-card-group>
         <hr />
         </div>
       </b-container>
     </b-container>
-    <b-modal id="modal-1" title="BootstrapVue" hide-footer>
+    <b-modal id="modal-1" title="Bootstrapvue">
+      <CommunityCreate />
+    </b-modal>
+    <b-modal id="modal-2" title="BootstrapVue" hide-footer>
       <CommunityDetail v-if="state === 'Detail'" :id="this.id" @changeEditState="changeEditState" />
       <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState"/>
     </b-modal>
@@ -39,7 +40,7 @@
 import CommunitySearch from "@/components/community/CommunitySearch";
 import CommunityDetail from "@/components/community/CommunityDetail";
 import CommunityEdit from "@/components/community/CommunityEdit";
-// import DetailCommunityArticle from "@/views/Community/Detail_C_Article"
+import CommunityCreate from "@/components/community/CommunityCreate";
 
 import axios from "axios";
 
@@ -61,6 +62,7 @@ export default {
     CommunitySearch,
     CommunityDetail,
     CommunityEdit,
+    CommunityCreate
   },
   methods: {
     get_articles() {

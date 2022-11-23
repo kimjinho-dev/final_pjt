@@ -37,7 +37,7 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000";
 
 export default {
-  name: "Create_C_Article",
+  name: "CommunityCreate",
   data() {
     return {
       communityarticletitle: null,
@@ -75,7 +75,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          this.$router.push({ name: "Community" });
+          this.$router.go();
         })
         .catch((err) => {
           console.log(err);
