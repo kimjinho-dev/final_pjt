@@ -10,13 +10,12 @@
           <b-card-group deck>
             <b-card
               header-tag="header"
-              footer="tags"
               footer-tag="footer"
               :title="getTitle(article)"
             >
               <b-card-text>
                 {{ article.content }}
-                <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
+                <b-card-img :src="`http://localhost:8000${article.image}`" fluid-glow alt="None" style="object-fit:cover" class="rounded-0"></b-card-img>
                 <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
               </b-card-text>
               <b-button v-b-modal.modal-2 @click="getArticleIdState(article)">Detail</b-button>
@@ -26,10 +25,10 @@
         </div>
       </b-container>
     </b-container>
-    <b-modal id="modal-1" title="Bootstrapvue">
+    <b-modal id="modal-1" title="Bootstrapvue" hide-header hide-footer>
       <CommunityCreate />
     </b-modal>
-    <b-modal id="modal-2" title="BootstrapVue" hide-footer>
+    <b-modal id="modal-2" size="lg" title="BootstrapVue" hide-header hide-footer>
       <CommunityDetail v-if="state === 'Detail'" :id="this.id" @changeEditState="changeEditState" />
       <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState" @getArticles="get_articles" />
     </b-modal>
@@ -99,3 +98,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>
