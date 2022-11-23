@@ -3,6 +3,7 @@
     <h1>Detail</h1>
     <p>{{ article?.user }}</p>
     <p>{{ article?.title }}</p>
+    <img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px">
     <p>{{ article?.content }}</p>
     <p>{{ article?.tags }}</p>
     <b-button @click="editState">Edit</b-button> |

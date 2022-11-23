@@ -12,6 +12,7 @@
               :title="getTitle(article)"
             >
               <b-card-text>{{ article.content }}</b-card-text>
+              <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
               <!-- <b-button :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }">Detail</b-button> | -->
               <b-button v-b-modal.modal-1 @click="getArticleIdState(article)">Detail</b-button>
             </b-card>

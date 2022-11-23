@@ -24,6 +24,8 @@
           type="text"
           v-model.trim="communityarticletags"
         />
+        <br />
+        <input type="file" name="image" id="image" @change="selectImage"/>
       </div>
       <b-button type="submit">submit</b-button>
     </form>
@@ -44,6 +46,7 @@ export default {
       communityarticletitle: null,
       communityarticlecontent: null,
       tags: null,
+      image: null,
       article: null,
     };
   },
@@ -69,16 +72,25 @@ export default {
         alert("제목을 입력해주세요");
         return;
       }
+      const frm = new FormData();
+      // const photoFile = document.getElementById("photo");
+      // frm.append("photo", photoFile.files[0]);
+      frm.append("image", this.image);
+      frm.append("title", this.communityarticletitle)
+      frm.append("content", this.communityarticlecontent)
+      frm.append("tags", this.communityarticletags)
+      // if (this.iamge.length > -1) {
+      //   for (let i = 0; i < this.iamge.length; i++) {
+      //     const imageForm = this.image
+      //   }
+      // }
       axios({
         method: "PUT",
         url: `${API_URL}/api/v1/community/${this.id}/`,
-        data: {
-          title: this.communityarticletitle,
-          content: this.communityarticlecontent,
-          tags: this.communityarticletags,
-        },
+        data: frm,
         headers: {
           Authorization: `Token ${this.$store.state.token}`,
+          'Content-Type': 'multipart/form-data',
         },
       })
         .then((res) => {
@@ -88,6 +100,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+      },
+      selectImage(e) {
+        this.image = e.target.files[0];
       }
     }
 }

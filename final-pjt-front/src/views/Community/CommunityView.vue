@@ -11,7 +11,6 @@
         <div>
           <b-card-group deck>
             <!-- <span v-for="tag in article.tags" :key="tag.id">#{{ tag.name }} </span> -->
-            <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
             <b-card
               header-tag="header"
               footer="tags"
@@ -22,6 +21,7 @@
                 {{ article.content }}
                 <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
               </b-card-text>
+              <b-card-img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px" class="rounded-0"></b-card-img>
               <!-- <b-button :to="{ name: 'DetailCommunityArticle', params: { id: article.id } }">Detail</b-button> | -->
               <b-button v-b-modal.modal-1 @click="getArticleIdState(article)">Detail</b-button>
             </b-card>
