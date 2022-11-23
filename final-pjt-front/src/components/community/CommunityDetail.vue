@@ -1,11 +1,11 @@
 <template>
   <b-container style="width: 726px">
-    <h1>Detail</h1>
+    <h1>{{ article?.title }}</h1>
     <p>{{ article?.user }}</p>
-    <p>{{ article?.title }}</p>
     <img :src="`http://localhost:8000${article.image}`" alt="None" style="width:726px">
     <p>{{ article?.content }}</p>
-    <p>{{ article?.tags }}</p>
+    <span v-for="tag,index in article.tags" :key="index">#{{ tag.name }} </span>
+    <br />
     <b-button @click="editState">Edit</b-button> |
     <b-button @click.prevent="deleteArticle">Delete</b-button>
   </b-container>
