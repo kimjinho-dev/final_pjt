@@ -4,20 +4,22 @@
     <hr />
     <form @submit.prevent="createArticle" enctype=“multipart/form-data”>
       <div>
-        <label for="communityarticletitle">Title: </label>
+        <label for="communityarticletitle"></label>
         <input
           id="communityarticletitle"
           type="text"
+          placeholder="제목"
           v-model.trim="communityarticletitle"
         />
         <br />
         <textarea
           cols="30"
           rows="10"
+          placeholder="내용"
           v-model="communityarticlecontent"
         ></textarea>
         <br />
-        <label for="communityarticletags">Tags: </label>
+        <label for="communityarticletags"></label>
         <input
           id="communityarticletags"
           placeholder="#태그1 #태그2"

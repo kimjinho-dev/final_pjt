@@ -1,8 +1,6 @@
 <template>
   <b-container style="width: 726px">
-    <h1>{{ this.$store.state.username }} 프로필 페이지</h1>
-    <hr />
-    <div><UserProfile /></div>
+    <h1>{{ this.$store.state.username }}'s Articles</h1>
     <hr />
     <div>
       <UserArticle />
@@ -12,12 +10,10 @@
 
 <script>
 import UserArticle from "@/components/account/UserArticle.vue";
-import UserProfile from "@/components/account/UserProfile.vue";
 
 export default {
   components: {
     UserArticle,
-    UserProfile,
   },
 };
 </script>

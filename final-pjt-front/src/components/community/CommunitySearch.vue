@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>게시글 검색</h1>
     <b-form-input
       v-model="searchData"
       placeholder="검색할 태그를 입력해주세요"

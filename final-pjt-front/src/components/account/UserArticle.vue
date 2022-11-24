@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>UserArticle이 출력되는 자리입니다.</h3>
       <b-container v-for="article in articles" :key="article.id">
         <div>
           <b-card-group deck>
@@ -18,7 +17,7 @@
         <hr />
         </div>
       </b-container>
-      <b-modal id="modal-1" title="BootstrapVue">
+      <b-modal id="modal-1" title="BootstrapVue" hide-footer hide-header>
         <CommunityDetail v-if="state === 'Detail'" :id="this.id" @changeEditState="changeEditState" />
         <CommunityEdit v-else-if="state === 'Edit'" :id="this.id" @changeDetailState="changeDetailState" @getArticles="get_articles" />
       </b-modal>
